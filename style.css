@@ -1,0 +1,37 @@
+
+body > table {
+    width: 80%;
+  }
+  
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  form div.form-action-buttons {
+    text-align: right;
+  }
+  
+  #btn1,
+  #btn2 {
+    cursor: pointer;
+    float: right;
+  }
+  #btn1 {
+    margin-left: 15px;
+    margin-right: auto;
+  }
+  .crimson-text {
+    text-shadow: 2px 2px 5px red;
+    font-size: medium;
+  }
+  .font-style {
+    font-style: italic;
+  }
+  .validation-error {
+    color: red;
+    margin-left: 5px;
+  }
+  

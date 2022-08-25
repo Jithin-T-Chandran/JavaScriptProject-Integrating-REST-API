@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+   <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <table class="table">
+      <tr>
+        <td>
+          <form onsubmit="event.preventDefault();saveData(event);">
+            <h1>Expense Calculator</h1>
+            <br />
+            <div class="form-group">
+              <label>Choose Expense*</label>
+              <input
+                type="text"
+                name="ExpenseDetails"
+                id="ExpenseDetails"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label>Choose Description</label>
+              <input
+                type="text"
+                name="DescriptionDetails"
+                id="DescriptionDetails"
+                maxlength="30"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select
+                name="CategoryDetails"
+                id="CategoryDetails"
+                class="form-control"
+              >
+                <option value="fuel">Fuel</option>
+                <option value="food">Food</option>
+                <option value="electricty">Electricty</option>
+                <option value="movie">Movie</option>
+              </select>
+            </div>
+            <div class="form-action-buttons">
+              <input type="submit" value="Submit" class="btn btn-info" />
+            </div>
+          </form>
+        </td>
+        <td>
+          <h2>Expense list</h2>
+          <p id="displayError" class="validation-error"></p>
+          <ul id="users" class="list-group"></ul>
+        </td>
+      </tr>
+      <tr></tr>
+    </table>
+    <script src='./script.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+  </body>
+</html>
