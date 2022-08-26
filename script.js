@@ -18,7 +18,7 @@ async function saveData(e) {
         description,
         category,
       };
-      const response = await axios.post("https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense",obj);
+      const response = await axios.post("https://crudcrud.com/api/a68e785ac20d454c8494f7304e787ae6/Expense",obj);
       if(response.status === 201){
              displayListOnScreen(response.data);
              resetForm();
@@ -54,7 +54,7 @@ async function editList(expenseid,description, expense, category) {
       DescriptionDetails.value = description;
       CategoryDetails.value = category;
     
-      const response = await axios.delete(`https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense/${expenseid}`);
+      const response = await axios.delete(`https://crudcrud.com/api/a68e785ac20d454c8494f7304e787ae6/Expense/${expenseid}`);
       if(response.status === 200){
           removeListFromScreen(expenseid);
       }else {
@@ -69,7 +69,7 @@ async function editList(expenseid,description, expense, category) {
 async function deleteList(expenseid) {
   try {
   if (confirm("Are you sure to delete this record ?")) {
-      const response = await axios.delete(`https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense/${expenseid}`);
+      const response = await axios.delete(`https://crudcrud.com/api/a68e785ac20d454c8494f7304e787ae6/Expense/${expenseid}`);
       if(response.status === 200){
          removeListFromScreen(expenseid);
       }else {
@@ -99,7 +99,7 @@ function resetForm(){
 
 async function getList(){
     try {
-        const response = await axios.get("https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense");
+        const response = await axios.get("https://crudcrud.com/api/a68e785ac20d454c8494f7304e787ae6/Expense");
         if(response.status === 200){
                   usersList.innerHTML="";
                   resetForm();
