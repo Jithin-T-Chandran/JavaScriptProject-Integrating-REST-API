@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expense Calculator</title>
+    <title>Expense Tracker</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -15,11 +15,11 @@
     <table class="table">
       <tr>
         <td>
-          <form onsubmit="event.preventDefault();saveData(event);">
-            <h1>Expense Calculator</h1>
+          <form onsubmit="saveData(event);">
+            <h1>Expense Tracker</h1>
             <br />
             <div class="form-group">
-              <label>Choose Expense*</label>
+              <label>Expense Amount*</label>
               <input
                 type="text"
                 name="ExpenseDetails"

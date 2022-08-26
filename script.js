@@ -4,10 +4,9 @@ let CategoryDetails = document.getElementById("CategoryDetails");
 let usersList = document.getElementById("users");
 
 
-function saveData(e) {
-    const message = document.getElementById("displayError");
-    message.innerHTML = "";
-    try {
+async function saveData(e) {
+  try {
+      e.preventDefault()
       const expense = e.target.ExpenseDetails.value;
       const description = e.target.DescriptionDetails.value;
       const category = e.target.CategoryDetails.value;
@@ -19,21 +18,16 @@ function saveData(e) {
         description,
         category,
       };
-    axios.post("https://crudcrud.com/api/c19e73daaf2548b18c84763e7de64953/Expense",obj)
-    .then((response) => {
-
+      const response = await axios.post("https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense",obj);
       if(response.status === 201){
-        // displayListOnScreen(response.data.expense);
-        getList();
-      } else {
-          throw new Error('Failed To create new expense');
+             displayListOnScreen(response.data);
+             resetForm();
+      }else {
+            throw new Error('Failed To create new expense');
       }
-      })
-    .catch(err => showError(err))
   } catch (error) {
-    message.innerHTML = "Error: " + error + ".";
+    showError(error);
   }
-
 }
 
 window.addEventListener("load",getList);
@@ -54,37 +48,36 @@ function displayListOnScreen(user) {
 
 //Edit
 
-function editList(expenseid,description, expense, category) {
-  ExpenseDetails.value = expense;
-  DescriptionDetails.value = description;
-  CategoryDetails.value = category;
-
-    //deleting
-    axios.delete(`https://crudcrud.com/api/c19e73daaf2548b18c84763e7de64953/Expense/${expenseid}`).then((response) => {
+async function editList(expenseid,description, expense, category) {
+    try {
+      ExpenseDetails.value = expense;
+      DescriptionDetails.value = description;
+      CategoryDetails.value = category;
+    
+      const response = await axios.delete(`https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense/${expenseid}`);
       if(response.status === 200){
-        removeListFromScreen(expenseid);
-          } else {
-              throw new Error('Failed to delete');
-          }
-      }).catch((err => {
-          showError(err);
-      }))
+          removeListFromScreen(expenseid);
+      }else {
+          throw new Error('Failed to delete');
+      }
+      }catch (error) {
+        showError(error);
+      }
 }
 
 // Delete
-
-function deleteList(expenseid) {
+async function deleteList(expenseid) {
+  try {
   if (confirm("Are you sure to delete this record ?")) {
-    axios.delete(`https://crudcrud.com/api/c19e73daaf2548b18c84763e7de64953/Expense/${expenseid}`).then((response) => {
-    if(response.status === 200){
-        removeListFromScreen(expenseid);
-        getList();
-          } else {
-              throw new Error('Failed to delete');
-          }
-      }).catch((err => {
-          showError(err);
-      }))
+      const response = await axios.delete(`https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense/${expenseid}`);
+      if(response.status === 200){
+         removeListFromScreen(expenseid);
+      }else {
+          throw new Error('Failed to delete');
+      }
+   }
+  }catch (error) {
+    showError(error);
   }
 }
 
@@ -97,20 +90,26 @@ function removeListFromScreen(expenseid) {
   document.getElementById(expenseElemId).remove();
 }
 
-function getList(){
-  axios.get("https://crudcrud.com/api/c19e73daaf2548b18c84763e7de64953/Expense").then(response => {
+function resetForm(){
+  ExpenseDetails.value="";
+  DescriptionDetails.value="";
+  CategoryDetails.value="";
+  ExpenseDetails.focus();
+}
+
+async function getList(){
+    try {
+        const response = await axios.get("https://crudcrud.com/api/409f22c2dd00479d99bb7b8f8823235b/Expense");
         if(response.status === 200){
-            usersList.innerHTML="";
-            ExpenseDetails.value="";
-            DescriptionDetails.value="";
-            CategoryDetails.value="";
-            ExpenseDetails.focus();
-            response.data.forEach(expense => {
-              displayListOnScreen(expense);
-             // console.log(expense)
-            })
-        } else {
-            throw new Error();
+                  usersList.innerHTML="";
+                  resetForm();
+                  response.data.forEach(expense => {
+                     displayListOnScreen(expense);
+                  })
+        }else {
+          throw new Error('Oops! something went wrong');
         }
-    })
+    }catch (error) {
+      showError(error);
+    }
 }
