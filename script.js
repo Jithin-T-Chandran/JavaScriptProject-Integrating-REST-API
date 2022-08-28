@@ -75,6 +75,8 @@ async function deleteList(expenseid) {
       }else {
           throw new Error('Failed to delete');
       }
+   }else{
+    throw new Error('Error');
    }
   }catch (error) {
     showError(error);
